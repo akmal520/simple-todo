@@ -75,6 +75,7 @@ function App() {
                             className="p-2 absolute right-2 text-headline bg-green-600 rounded-full"
                             onClick={handelAddTodo}
                             disabled={input !== '' ? false : true}
+                            aria-label="Add"
                         >
                             <FaPlus />
                         </button>
@@ -118,6 +119,7 @@ function App() {
                                                 doc(db, 'todo', item.id)
                                             )
                                         }
+                                        aria-label="Delete"
                                     >
                                         <RiDeleteBin6Fill />
                                     </button>
