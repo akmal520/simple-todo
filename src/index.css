@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght@200;300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Handjet', 'cursive';
+    }
+}
+
+.scrollbar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    background-color: #242629;
+}
+
+.scrollbar::-webkit-scrollbar {
+    width: 6px;
+    background-color: #242629;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #16161a;
+}
