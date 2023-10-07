@@ -13,6 +13,7 @@ import {
 } from 'firebase/firestore';
 import { db } from './services/firebase';
 import { addData } from './services/all.services';
+import { motion } from 'framer-motion';
 
 function App() {
     const [todo, setTodo] = useState([]);
@@ -30,8 +31,6 @@ function App() {
         });
         return () => unsubscribe();
     }, []);
-
-    // console.log(todo);
 
     const handelAddTodo = () => {
         addData(addTodo);
@@ -53,15 +52,52 @@ function App() {
         });
     };
 
+    const variantContainer = {
+        hidden: { opacity: 1, scale: 0 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: {
+                delayChildren: 0.5,
+                staggerChildren: 0.5,
+            },
+        },
+    };
+
+    const variantItem = {
+        hidden: { y: 20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+        },
+    };
+
     return (
         <section className="h-full w-full bg-bgColor">
             <div className="container mx-auto py-10 w-full flex flex-col items-center lg:px-72">
-                <h1 className="text-5xl font-bold text-headline tracking-widest uppercase mb-4">
+                <motion.h1
+                    className="text-5xl font-bold text-headline tracking-widest uppercase mb-4"
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{
+                        duration: 0.8,
+                        delay: 0.25,
+                        ease: [0, 0.71, 0.2, 1.01],
+                    }}
+                >
                     Ben Todo
-                </h1>
+                </motion.h1>
 
-                <div className="w-full h-full">
-                    <div className="flex items-center gap-4 relative">
+                <motion.div
+                    className="w-full h-full"
+                    variants={variantContainer}
+                    initial="hidden"
+                    animate="visible"
+                >
+                    <motion.div
+                        className="flex items-center gap-4 relative"
+                        variants={variantItem}
+                    >
                         <input
                             type="text"
                             placeholder="What do you want to do?"
@@ -79,9 +115,12 @@ function App() {
                         >
                             <FaPlus />
                         </button>
-                    </div>
+                    </motion.div>
 
-                    <div className="mt-4 flex flex-col gap-3 border-2 border-cardBg rounded-md p-4 scrollbar overflow-x-auto h-[70vh]">
+                    <motion.div
+                        className="mt-4 flex flex-col gap-3 border-2 border-cardBg rounded-md p-4 scrollbar overflow-x-auto h-[70vh]"
+                        variants={variantItem}
+                    >
                         {todo.length > 0 ? (
                             todo.map((item) => (
                                 <div
@@ -130,8 +169,8 @@ function App() {
                                 <ImSpinner9 className="w-10 h-10 animate-spin text-headline" />
                             </div>
                         )}
-                    </div>
-                </div>
+                    </motion.div>
+                </motion.div>
             </div>
 
             <footer className="text-center py-4 bg-cardBg/60 rounded-t-3xl">
